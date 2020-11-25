@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  mapi:
+    container_name: mapi-backend
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./src:/app/src
+      - ./runner.conf:/app/runner.conf
+    ports:
+      - 8080:8080
+    env_file:
+      - ./.env
+    environment:
+      PORT: $PORT
+    restart: always
