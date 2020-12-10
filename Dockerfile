@@ -14,4 +14,4 @@ RUN chmod +x mapi
 
 EXPOSE 8080
 
-CMD ./mapi
+CMD [ "sh", "mapi" ]
