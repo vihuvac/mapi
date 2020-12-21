@@ -9,6 +9,7 @@ import (
 // SetRoutes sets all the available routes.
 func SetRoutes(router *mux.Router) *mux.Router {
 	router.HandleFunc("/api/characters", controllers.GetCharacters).Methods("GET")
+	router.HandleFunc("/api/characters", middlewares.IsAuthorized(controllers.CreateCharacter)).Methods("POST")
 	return router
 }
 
