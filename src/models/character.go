@@ -3,9 +3,9 @@ package models
 // Character model.
 type Character struct {
 	Base
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Nickname  string `json:"nickname"`
+	FirstName string `json:"firstName" gorm:"column:firstName" validate:"required"`
+	LastName  string `json:"lastName" gorm:"column:lastName" validate:"required"`
+	Nickname  string `json:"nickname" validate:"required"`
 	Items     []Item `json:"items"`
 }
 
