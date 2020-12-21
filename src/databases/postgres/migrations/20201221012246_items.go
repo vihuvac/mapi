@@ -1,5 +1,4 @@
-
-package main
+package migrations
 
 import (
 	"github.com/jinzhu/gorm"
