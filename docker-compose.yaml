@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./runner.conf:/app/runner.conf
-      - ./dlv.sh:/app/dlv.sh
+      #- ./dlv.sh:/app/dlv.sh
     ports:
       - 8080:8080
       - 6868:6868

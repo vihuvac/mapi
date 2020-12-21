@@ -4,18 +4,19 @@ WORKDIR /app
 
 COPY ./src /app/src
 COPY ./runner.conf /app/runner.conf
-COPY ./dlv.sh /app/dlv.sh
+#COPY ./dlv.sh /app/dlv.sh
 
 RUN go get github.com/gorilla/mux \
   gopkg.in/go-playground/validator.v9 \
   github.com/satori/go.uuid \
   github.com/stretchr/testify \
   github.com/go-delve/delve/cmd/dlv \
+  #github.com/go-delve/delve/cmd/dlv
   github.com/pilu/fresh
 
 # Run delve debugger.
-RUN chmod +x dlv.sh
-CMD [ "sh", "dlv.sh" ]
+#RUN chmod +x dlv.sh
+#CMD [ "sh", "dlv.sh" ]
 
 # Run the app with fresh.
-#CMD [ "fresh" ]
+CMD [ "fresh" ]
