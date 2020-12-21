@@ -8,9 +8,12 @@ COPY ./runner.conf /app/runner.conf
 
 RUN go get github.com/gorilla/mux \
   gopkg.in/go-playground/validator.v9 \
+  github.com/jinzhu/gorm \
+  github.com/jinzhu/gorm/dialects/postgres \
+  github.com/Altoros/gorm-goose/cmd/gorm-goose \
   github.com/satori/go.uuid \
   github.com/stretchr/testify \
-  github.com/go-delve/delve/cmd/dlv \
+  github.com/dgrijalva/jwt-go \
   #github.com/go-delve/delve/cmd/dlv
   github.com/pilu/fresh
 

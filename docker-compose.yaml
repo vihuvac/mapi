@@ -18,3 +18,20 @@ services:
     environment:
       PORT: $PORT
     restart: always
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: mapi-db
+    image: postgres:13.1
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+volumes:
+  postgres_volume:
+    external:
+      name: mapi-postgres-db
