@@ -1,19 +1,17 @@
 package models
 
-// MaterialInfo model.
-type MaterialInfo struct {
-	Type            string  `json:"type"`
-	Length          float32 `json:"length"`
-	Characteristics string  `json:"characteristics"`
-}
-
-// HistoricalInfo model.
-type HistoricalInfo struct {
-	Manufacturer string `json:"manufacturer"`
-}
-
 // Item model.
 type Item struct {
-	MaterialInfo
-	HistoricalInfo
+	Base
+	Type            string  `json:"type" validate:"required"`
+	Length          float32 `json:"length" validate:"required"`
+	Characteristics string  `json:"characteristics" validate:"required"`
+	Manufacturer    string  `json:"manufacturer"`
+}
+
+// ItemsResponse for the http request.
+type ItemsResponse struct {
+	Total int16  `json:"total"`
+	Items []Item `json:"items"`
+	Link  Link   `json:"link"`
 }
