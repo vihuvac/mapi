@@ -1,18 +1,37 @@
 version: "3"
 
 services:
-  mapi:
-    container_name: mapi-backend
+  api:
+    container_name: mapi-api
     build:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
       - ./src:/app/src
       - ./runner.conf:/app/runner.conf
+      #- ./dlv.sh:/app/dlv.sh
     ports:
       - 8080:8080
+      - 6868:6868
     env_file:
       - ./.env
     environment:
       PORT: $PORT
     restart: always
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: mapi-db
+    image: postgres:13.1
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+
+volumes:
+  postgres_volume:
+    external:
+      name: mapi-postgres-db

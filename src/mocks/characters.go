@@ -18,13 +18,13 @@ func GenerateCharacters() []models.Character {
 		LastName:  "Potter",
 		Nickname:  "Harry",
 		Items: append(harryItems, models.Item{
-			models.MaterialInfo{
-				Type:            "Wand",
-				Length:          11, // Floating number to represent the length in inches.
-				Characteristics: "Nice and supple, brother of Voldemort's wand.",
-			},
-			models.HistoricalInfo{
-				Manufacturer: "Garrick Ollivander",
+			Type:            "Wand",
+			Length:          11, // Floating number to represent the length in inches.
+			Characteristics: "Nice and supple, brother of Voldemort's wand.",
+			Manufacturer:    "Garrick Ollivander",
+			Base: models.Base{
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
 			},
 		}),
 		Base: models.Base{
@@ -32,7 +32,7 @@ func GenerateCharacters() []models.Character {
 			UpdatedAt: time.Now(),
 		},
 	}
-	harry.BeforeCreate() // This method will behave as a hook when the DB is implemented.
+	//harry.BeforeCreate() // This method will behave as a hook when the DB is implemented.
 	characters = append(characters, harry)
 
 	// Create Ron's character.
@@ -42,13 +42,13 @@ func GenerateCharacters() []models.Character {
 		LastName:  "Weasley",
 		Nickname:  "Ron",
 		Items: append(ronItems, models.Item{
-			models.MaterialInfo{
-				Type:            "Wand",
-				Length:          12, // Floating number to represent the length in inches.
-				Characteristics: "Made of ash wood, and possessed a unicorn hair core.",
-			},
-			models.HistoricalInfo{
-				Manufacturer: "Garrick Ollivander",
+			Type:            "Wand",
+			Length:          12, // Floating number to represent the length in inches.
+			Characteristics: "Made of ash wood, and possessed a unicorn hair core.",
+			Manufacturer:    "Garrick Ollivander",
+			Base: models.Base{
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
 			},
 		}),
 		Base: models.Base{
@@ -56,7 +56,7 @@ func GenerateCharacters() []models.Character {
 			UpdatedAt: time.Now(),
 		},
 	}
-	ron.BeforeCreate() // This method will behave as a hook when the DB is implemented.
+	//ron.BeforeCreate() // This method will behave as a hook when the DB is implemented.
 	characters = append(characters, ron)
 
 	// Create Hermione's character.
@@ -66,13 +66,13 @@ func GenerateCharacters() []models.Character {
 		LastName:  "Granger",
 		Nickname:  "Hermione",
 		Items: append(hermioneItems, models.Item{
-			models.MaterialInfo{
-				Type:            "Wand",
-				Length:          10.75, // Floating number to represent the length in inches.
-				Characteristics: "Made of vine wood, and possessed a dragon heartstring core.",
-			},
-			models.HistoricalInfo{
-				Manufacturer: "Garrick Ollivander",
+			Type:            "Wand",
+			Length:          10.75, // Floating number to represent the length in inches.
+			Characteristics: "Made of vine wood, and possessed a dragon heartstring core.",
+			Manufacturer:    "Garrick Ollivander",
+			Base: models.Base{
+				CreatedAt: time.Now(),
+				UpdatedAt: time.Now(),
 			},
 		}),
 		Base: models.Base{
@@ -80,7 +80,7 @@ func GenerateCharacters() []models.Character {
 			UpdatedAt: time.Now(),
 		},
 	}
-	hermione.BeforeCreate() // This method will behave as a hook when the DB is implemented.
+	//hermione.BeforeCreate() // This method will behave as a hook when the DB is implemented.
 	characters = append(characters, hermione)
 
 	return characters
