@@ -18,4 +18,4 @@ RUN chmod +x mapi
 
 EXPOSE 8080
 
-CMD [ "sh", "mapi" ]
+ENTRYPOINT [ "./mapi" ]
