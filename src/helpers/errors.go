@@ -24,11 +24,11 @@ type ControllerError struct {
 }
 
 // ErrorResponse is used by controllers to respond to the API request.
-func ErrorResponse(w http.ResponseWriter, reason string, message string, code int) {
-	log.Printf("[ControllerError]: %s\n", reason)
+func ErrorResponse(w http.ResponseWriter, err string, message string, code int) {
+	log.Printf("[ControllerError]: %s\n", err)
 
 	object := ControllerError{
-		Error:   reason,
+		Error:   err,
 		Message: message,
 		Code:    code,
 	}
