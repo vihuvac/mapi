@@ -23,7 +23,7 @@ services:
 
   postgres:
     container_name: mapi-db
-    image: postgres:13.1
+    image: postgres:13.3
     volumes:
       - postgres_volume:/var/lib/postgresql/data
     ports:
