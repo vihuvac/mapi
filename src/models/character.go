@@ -5,7 +5,7 @@ type Character struct {
 	Base
 	FirstName string `json:"firstName" gorm:"column:firstName" validate:"required"`
 	LastName  string `json:"lastName" gorm:"column:lastName" validate:"required"`
-	Nickname  string `json:"nickname" validate:"required"`
+	Nickname  string `json:"nickname" gorm:"unique" validate:"required"`
 	Items     []Item `json:"items"`
 }
 
