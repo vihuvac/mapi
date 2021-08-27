@@ -28,7 +28,7 @@ func Init() (*gorm.DB, error) {
 	}
 
 	if err != nil {
-		return DB, err
+		return nil, err
 	}
 
 	// Create tables if they do not exist.

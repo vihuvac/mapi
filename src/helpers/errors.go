@@ -8,6 +8,7 @@ import (
 
 // ErrorHandler is the custom error struct for the handlers.
 type ErrorHandler struct {
+	Detail  string
 	Message string
 	Code    int
 }
