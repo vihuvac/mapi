@@ -32,3 +32,8 @@ func (base *Base) BeforeCreate(scope *gorm.Scope) error {
 type Link struct {
 	Next string `json:"next"`
 }
+
+// CreatedRecordResponse is a generic struct to represent the response of a new record created.
+type CreatedRecordResponse struct {
+	ID uuid.UUID `json:"id"`
+}
