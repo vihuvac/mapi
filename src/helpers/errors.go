@@ -17,21 +17,19 @@ func (errorHandler *ErrorHandler) Error() string {
 	return errorHandler.Message
 }
 
-// ControllerError is the custom error struct for the handlers.
-type ControllerError struct {
-	Error   string `json:"error"`
+// ErrorController is the custom error struct for the handlers.
+type ErrorController struct {
+	Detail  string `json:"detail"`
 	Message string `json:"message"`
-	Code    int    `json:"status"`
 }
 
-// ErrorResponse is used by controllers to respond to the API request.
-func ErrorResponse(w http.ResponseWriter, err string, message string, code int) {
-	log.Printf("[ControllerError]: %s\n", err)
+// ResponseError is used by controllers to respond to the API request.
+func ResponseError(w http.ResponseWriter, detail string, message string, code int) {
+	log.Printf("[Response Error]: %s\n", detail)
 
-	object := ControllerError{
-		Error:   err,
+	object := ErrorController{
+		Detail:  detail,
 		Message: message,
-		Code:    code,
 	}
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")

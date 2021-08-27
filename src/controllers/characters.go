@@ -9,9 +9,25 @@ import (
 	"../services"
 )
 
+var (
+	characterService services.CharacterService
+)
+
+type CharacterController interface {
+	GetCharacters(w http.ResponseWriter, r *http.Request)
+	CreateCharacter(w http.ResponseWriter, r *http.Request)
+}
+
+type controller struct{}
+
+func NewCharacterController(service services.CharacterService) CharacterController {
+	characterService = service
+	return &controller{}
+}
+
 // GetCharacters is the controller function to get a list of characters.
-func GetCharacters(w http.ResponseWriter, r *http.Request) {
-	characters, err := services.GetCharacters()
+func (*controller) GetCharacters(w http.ResponseWriter, r *http.Request) {
+	characters, err := characterService.FindAll()
 
 	if err == nil && characters == nil {
 		w.WriteHeader(http.StatusNotFound)
@@ -19,7 +35,7 @@ func GetCharacters(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if charactersError, ok := err.(*helpers.ErrorHandler); ok {
-		helpers.ErrorResponse(w, charactersError.Error(), charactersError.Message, charactersError.Code)
+		helpers.ResponseError(w, charactersError.Error(), charactersError.Message, charactersError.Code)
 		return
 	}
 
@@ -29,18 +45,18 @@ func GetCharacters(w http.ResponseWriter, r *http.Request) {
 }
 
 // CreateCharacter is the controller function to create a new character.
-func CreateCharacter(w http.ResponseWriter, r *http.Request) {
+func (*controller) CreateCharacter(w http.ResponseWriter, r *http.Request) {
 	var characterProps models.Character
 	err := json.NewDecoder(r.Body).Decode(&characterProps)
 	if err != nil {
-		helpers.ErrorResponse(w, err.Error(), "Bad request", 400)
+		helpers.ResponseError(w, err.Error(), "Bad request", http.StatusBadRequest)
 		return
 	}
 
-	character, err := services.CreateCharacter(characterProps)
+	character, err := characterService.Create(characterProps)
 	if err != nil {
 		if createCharacterError, ok := err.(*helpers.ErrorHandler); ok {
-			helpers.ErrorResponse(w, createCharacterError.Error(), createCharacterError.Message, createCharacterError.Code)
+			helpers.ResponseError(w, createCharacterError.Detail, createCharacterError.Message, http.StatusConflict)
 			return
 		}
 	}

@@ -1,22 +1,12 @@
 package routers
 
 import (
-	"../controllers"
-	"../middlewares"
-	"github.com/gorilla/mux"
+	"net/http"
 )
 
-// SetRoutes sets all the available routes.
-func SetRoutes(router *mux.Router) *mux.Router {
-	router.HandleFunc("/api/characters", controllers.GetCharacters).Methods("GET")
-	router.HandleFunc("/api/characters", middlewares.IsAuthorized(controllers.CreateCharacter)).Methods("POST")
-	return router
-}
-
-// InitRoutes initializes the routes.
-func InitRoutes() *mux.Router {
-	router := mux.NewRouter().StrictSlash(false)
-	router.Use(middlewares.AccessControl)
-	router = SetRoutes(router)
-	return router
+type Router interface {
+	GET(uri string, f func(w http.ResponseWriter, r *http.Request))
+	POST(uri string, f func(w http.ResponseWriter, r *http.Request))
+	Use(f func(h http.Handler) http.Handler)
+	Serve(port string)
 }

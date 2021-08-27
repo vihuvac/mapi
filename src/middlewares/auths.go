@@ -16,7 +16,7 @@ func IsAuthorized(handler http.HandlerFunc) http.HandlerFunc {
 		authHeader := r.Header.Get("Authorization")
 
 		if len(authHeader) == 0 {
-			helpers.ErrorResponse(w, "Bad Request", "Missing authorization header", http.StatusBadRequest)
+			helpers.ResponseError(w, "Bad Request.", "Missing authorization header.", http.StatusBadRequest)
 			return
 		}
 
@@ -31,13 +31,13 @@ func IsAuthorized(handler http.HandlerFunc) http.HandlerFunc {
 
 		if err != nil {
 			message := "There was an error verifying the authorization token: " + err.Error()
-			helpers.ErrorResponse(w, "Bad Request", message, http.StatusBadRequest)
+			helpers.ResponseError(w, "Bad Request.", message, http.StatusBadRequest)
 			return
 		}
 
 		claims, _ := token.Claims.(jwt.MapClaims)
 		if !(claims["user"] == os.Getenv("AUTH_USER") && token.Valid) {
-			helpers.ErrorResponse(w, "Unauthorized", "Not authorized", http.StatusUnauthorized)
+			helpers.ResponseError(w, "Unauthorized.", "Not authorized.", http.StatusUnauthorized)
 			return
 		}
 
